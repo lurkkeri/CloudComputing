@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <style>
+            body{
+                padding: 20px;
+                margin: 0;
+                background-color:bisque;
+            }
+            .container {
+                max-width: 600px;
+                margin: auto;
+                background-color: bisque;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0);
+            }
+            input[type="text"]{
+                width: calc(100% - 100px);
+                padding: 10px;
+                margin-right: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            button {
+                width: 90px;
+                padding: 10px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+            }
+            .sentence {
+                border-left: 5px solid #ccc;
+            }
+            .ham {
+                border-left-color: #4CAF50;
+            }
+            .spam{
+                border-left-color: #F44336;
+            }
+        </style>
+    </head>
+    <body>
+        <div class ="container">
+            <h2>Submit a sentence and we determine if it is spam or ham</h2>
+            <input type="text" id="sentenceInput" placeholder="write your sentence">
+            <button onclick="submitSentence()">Submit</button>
+        <div id="sentences" class="sentences"></div>
+        </div>
+        <script>
+            function submitSentence(){
+                var input = document.getElementById("sentenceInput");
+                var text = input.value.trim();
+                if(text){
+                    var sentimentClass = document.querySelectorAll('.sentence').length % 2 == 0 ? 'ham': 'spam';
+                    var sentiment = sentimentClass == 'ham' ? 'Ham':'Spam';
+
+                    var sentenceDiv = document.getElementById('sentences');
+                    var newSentence = document.createElement('div');
+                    newSentence.classList.add('sentence', sentimentClass);
+                    newSentence.textContent = `${text} - Sentiment: ${sentiment}`;
+                    sentenceDiv.appendChild(newSentence);
+
+                    input.value = '';
+                }
+            }
+        </script>
+    </body>
+</html>
